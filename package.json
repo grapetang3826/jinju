@@ -1,0 +1,11 @@
+{
+  "name": "jinju",
+  "version": "1.0.0",
+  "description": "一个简单的Chrome浏览器扩展，可以将网页中的文字内容转换成精美的图片",
+  "scripts": {
+    "convert-icons": "node icons/convert.js"
+  },
+  "dependencies": {
+    "sharp": "^0.32.6"
+  }
+}

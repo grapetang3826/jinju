@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网页金句(Jinju)</title>
+  <style>
+    body {
+      width: 400px;
+      padding: 16px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: vertical;
+      font-size: 14px;
+    }
+    .style-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .style-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .style-option {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .style-option.active {
+      border-color: #1a73e8;
+      background-color: #e8f0fe;
+    }
+    .preview {
+      width: 100%;
+      min-height: 200px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .button-group {
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      flex: 1;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .primary {
+      background-color: #1a73e8;
+      color: white;
+    }
+    .secondary {
+      background-color: #f1f3f4;
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <textarea id="text-input" placeholder="请输入或粘贴文字内容（最多500字）"></textarea>
+    
+    <div class="style-section">
+      <h3>背景样式</h3>
+      <div class="style-options" id="background-styles">
+        <div class="style-option active" data-style="plain-white">纯白</div>
+        <div class="style-option" data-style="plain-beige">米色</div>
+        <div class="style-option" data-style="plain-gray">浅灰</div>
+      </div>
+    </div>
+
+    <div class="style-section">
+      <h3>字体样式</h3>
+      <div class="style-options" id="font-styles">
+        <div class="style-option active" data-font="source-han-serif">思源宋体</div>
+        <div class="style-option" data-font="alibaba">阿里普惠</div>
+        <div class="style-option" data-font="zcool">站酷快乐</div>
+      </div>
+    </div>
+
+    <div class="style-section">
+      <h3>字体颜色</h3>
+      <div class="style-options" id="font-colors">
+        <div class="style-option active" data-color="#000000">黑色</div>
+        <div class="style-option" data-color="#4A4A4A">深灰</div>
+        <div class="style-option" data-color="#8B4513">棕色</div>
+      </div>
+    </div>
+
+    <div class="preview" id="preview">
+      <p>预览区域</p>
+    </div>
+
+    <div class="button-group">
+      <button class="secondary" id="generate-btn">生成预览</button>
+      <button class="primary" id="download-btn">下载图片</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
