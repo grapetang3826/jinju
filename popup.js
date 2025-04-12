@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const preview = document.getElementById('preview');
   const generateBtn = document.getElementById('generate-btn');
   const downloadBtn = document.getElementById('download-btn');
+  const summarizeBtn = document.getElementById('summarize-btn');
 
   // 当前选中的样式
   let currentStyle = {
@@ -152,7 +153,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 'image/png');
   }
 
+  // 调用DeepSeek API进行文本总结
+  async function summarizeText() {
+    const text = textInput.value.trim();
+    if (!text) {
+      alert('请输入需要总结的文本内容');
+      return;
+    }
+
+    try {
+      summarizeBtn.disabled = true;
+      summarizeBtn.textContent = '正在总结...';
+      textInput.value = '';
+
+      const response = await fetch('http://localhost:3000/api/summarize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API请求失败: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      textInput.value = text + '\n\n总结：\n' + data.choices[0].message.content;
+    } catch (error) {
+      console.error('总结失败:', error);
+      alert(`总结失败: ${error.message}`);
+      textInput.value = text;
+    } finally {
+      summarizeBtn.disabled = false;
+      summarizeBtn.textContent = 'DeepSeek R1总结';
+    }
+  }
+
   // 绑定按钮事件
   generateBtn.addEventListener('click', generateImage);
   downloadBtn.addEventListener('click', downloadImage);
+  summarizeBtn.addEventListener('click', summarizeText);
 });
